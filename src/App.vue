@@ -1,26 +1,64 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <body>
+    <div class="wrapper">
+      <div id="header" class="header row">
+        <div class="left">
+          <div class="wrap-img">
+            <img src="../img/bg/logo.png" alt="logo" />
+          </div>
+        </div>
+        <div class="center">
+          <catalog-search></catalog-search>
+        </div>
+        <div class="right">
+          <catalog-authorization></catalog-authorization>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="top">
+          <div class="left">
+            <catalog-navigation></catalog-navigation>
+            <catalog-sorting></catalog-sorting>
+          </div>
+        </div>
+        <div class="bottom row">
+          <catalog-filter></catalog-filter>
+          <div class="right" id="pageNumberContainer">
+            <catalog-products></catalog-products>
+            <catalog-pagination> </catalog-pagination>
+          </div>
+        </div>
+      </div>
+      <catalog-footer></catalog-footer>
+    </div>
+  </body>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import CatalogSearch from './components/catalog-search.vue'
+  import CatalogAuthorization from './components/catalog-authorization.vue'
+  import CatalogNavigation from './components/catalog-navigation.vue'
+  import CatalogSorting from './components/catalog-sorting.vue'
+  import CatalogFilter from './components/catalog-filter.vue'
+  import CatalogProducts from './components/catalog-products.vue'
+  import CatalogPagination from './components/catalog-pagination.vue'
+  import CatalogFooter from './components/catalog-footer.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    name: 'App',
+
+    components: {
+      CatalogSearch,
+      CatalogAuthorization,
+      CatalogNavigation,
+      CatalogSorting,
+      CatalogFilter,
+      CatalogProducts,
+      CatalogPagination,
+      CatalogFooter,
+    },
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style src="../css/style.css"></style>
