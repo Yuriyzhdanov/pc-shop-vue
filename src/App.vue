@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="center">
-          <catalog-search></catalog-search>
+          <catalog-search v-bind:productsCaptions="productsCaptions"></catalog-search>
         </div>
         <div class="right">
           <catalog-authorization></catalog-authorization>
@@ -25,7 +25,7 @@
         <div class="bottom row">
           <catalog-filter></catalog-filter>
           <div class="right" id="pageNumberContainer">
-            <catalog-products></catalog-products>
+            <catalog-products v-bind:products="products"></catalog-products>
             <catalog-pagination> </catalog-pagination>
           </div>
         </div>
@@ -45,6 +45,8 @@
   import CatalogPagination from './components/catalog-pagination.vue'
   import CatalogFooter from './components/catalog-footer.vue'
 
+  import products from './products'
+
   export default {
     name: 'App',
 
@@ -58,6 +60,18 @@
       CatalogPagination,
       CatalogFooter,
     },
+
+    computed: {
+      productsCaptions() {
+        return this.products.map(product => product.caption)
+      },
+    },
+
+    data() {
+      return {
+        products
+      }
+    }
   }
 </script>
 
