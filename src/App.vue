@@ -10,6 +10,7 @@
         <div class="center">
           <catalog-search
             v-bind:productsCaptions="productsCaptions"
+            v-on:onSearchQuery="handleSerchQuery"
           ></catalog-search>
         </div>
         <div class="right">
@@ -74,6 +75,12 @@
         products,
       }
     },
+
+    methods: {
+      handleSerchQuery(detail) {
+        this.products = this.products.filter(p => p.caption.includes(detail))
+      }
+    }
   }
 </script>
 

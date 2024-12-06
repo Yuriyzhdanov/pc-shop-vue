@@ -16,7 +16,7 @@
         />
       </div>
       <div class="right">
-        <input type="submit" value="" class="search-btn" />
+        <input v-on:click="handleSearch" type="submit" value="" class="search-btn" />
       </div>
     </div>
   </div>
@@ -27,6 +27,7 @@
 
   export default {
     props: ['productsCaptions'],
+    emits: ['onSearchQuery'],
 
     data() {
       return {
@@ -35,9 +36,8 @@
     },
 
     methods: {
-      handle() {
-        console.log(this.productsCaptions)
-        console.log(this.query)
+      handleSearch() {
+        this.$emit('onSearchQuery', this.query)
       }
     }
   }
