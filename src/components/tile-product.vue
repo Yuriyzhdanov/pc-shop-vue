@@ -1,5 +1,6 @@
 <template>
   <div class="wrap-product" data-product-id="63">
+    <span> {{ product.caption }}</span>
     <div class="wrap-a">
       <a href="./product.html?id=63" target="_blank" class="a-link">
         <div class="wrap-img">
@@ -8,8 +9,9 @@
             alt="Офисный ПК Solaris-H"
           />
         </div>
-        <div class="wrap-h3"><h3>Офисный ПК Solaris-H</h3></div></a
-      >
+        <div class="wrap-h3">
+          <h3></h3></div
+      ></a>
     </div>
     <div>
       <label for="Количество ядер-4">4</label
@@ -31,10 +33,12 @@
         <button class=""></button>
       </div>
     </div>
-    <div class="new_"></div>
+    <div class="new"></div>
   </div>
 </template>
 
 <script>
-
+  export default {
+    props: ['product'],
+  }
 </script>

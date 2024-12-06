@@ -8,7 +8,9 @@
           </div>
         </div>
         <div class="center">
-          <catalog-search v-bind:productsCaptions="productsCaptions"></catalog-search>
+          <catalog-search
+            v-bind:productsCaptions="productsCaptions"
+          ></catalog-search>
         </div>
         <div class="right">
           <catalog-authorization></catalog-authorization>
@@ -69,9 +71,9 @@
 
     data() {
       return {
-        products
+        products,
       }
-    }
+    },
   }
 </script>
 
