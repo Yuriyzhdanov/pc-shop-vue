@@ -4,7 +4,11 @@
     <div class="row">
       <div class="left" id="searchContainer">
         <datalist id="productCaptions">
-          <option v-for="(caption, idx) of productsCaptions" v-bind:value="caption" v-bind:key="idx"></option>
+          <option
+            v-for="(caption, idx) of productsCaptions"
+            v-bind:value="caption"
+            v-bind:key="idx"
+          ></option>
         </datalist>
         <input
           v-model="query"
@@ -16,15 +20,18 @@
         />
       </div>
       <div class="right">
-        <input v-on:click="handleSearch" type="submit" value="" class="search-btn" />
+        <input
+          v-on:click="handleSearch"
+          type="submit"
+          value=""
+          class="search-btn"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-
   export default {
     props: ['productsCaptions'],
     emits: ['onSearchQuery'],
@@ -38,26 +45,13 @@
     methods: {
       handleSearch() {
         this.$emit('onSearchQuery', this.query)
-      }
-    }
+      },
+    },
   }
-
-
-
-
-
-
-
-
-
-
 
   // run(products) {
   //   return products.filter(product =>
   //     product.caption.toLowerCase().includes(this.query.toLowerCase())
   //   )
   // }
-
-
-
 </script>
