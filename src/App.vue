@@ -78,9 +78,11 @@
 
     methods: {
       handleSerchQuery(detail) {
-        this.products = this.products.filter(p => p.caption.includes(detail))
-      }
-    }
+        this.products = this.products.filter(p =>
+          p.caption.toLowerCase().includes(detail.toLowerCase())
+        )
+      },
+    },
   }
 </script>
 
