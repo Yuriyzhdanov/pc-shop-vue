@@ -33,7 +33,7 @@
             <catalog-products
               v-bind:products="sortedProducts"
             ></catalog-products>
-            <catalog-pagination> </catalog-pagination>
+            <catalog-pagination></catalog-pagination>
           </div>
         </div>
       </div>
