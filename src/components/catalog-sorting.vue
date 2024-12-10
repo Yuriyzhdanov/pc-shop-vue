@@ -30,14 +30,14 @@
           name="sort"
           class="sort"
           v-model="selectedSorting"
-          v-on:change="applySorting"
+          v-on:change="handleChangeSelect"
         >
           <option
-            v-for="type in availableSortingTypes"
-            :key="type"
-            :value="type"
+            v-for="(val, key) in availableSortingTypes"
+            :key="key"
+            :value="key"
           >
-            {{ getSorting(type) }}
+            {{ val }}
           </option>
         </select>
       </div>
@@ -46,33 +46,44 @@
 </template>
 
 <script>
-  export default {
-    props: [],
-    emits: ['onSortChange'],
-    data() {
-      return {
-        selectedSorting: 'byPriceASC',
-        availableSortingTypes: [
-          'byPriceASC',
-          'byPriceDESC',
-          'byCaptionASC',
-          'byCaptionDESC',
-        ],
+export default {
+  props: ['products'],
+  emits: ['onSortChange'],
+
+  computed: {
+    sortedProducts() {
+      const sortFunctions = {
+        byPriceASC: (a, b) => a.convertedPrice - b.convertedPrice,
+        byPriceDESC: (a, b) => b.convertedPrice - a.convertedPrice,
+        byCaptionASC: (a, b) =>
+          a.caption.localeCompare(b.caption, undefined, {
+            sensitivity: 'accent',
+          }),
+        byCaptionDESC: (a, b) =>
+          b.caption.localeCompare(a.caption, undefined, {
+            sensitivity: 'accent',
+          }),
       }
+      return this.products.toSorted(sortFunctions[this.selectedSorting])
     },
-    methods: {
-      applySorting() {
-        this.$emit('onSortChange', this.selectedSorting)
+  },
+
+  data() {
+    return {
+      selectedSorting: 'byPriceASC',
+      availableSortingTypes: {
+        byPriceASC: 'Цена: по возрастанию',
+        byPriceDESC: 'Цена: по убыванию',
+        byCaptionASC: 'Название: А-Я',
+        byCaptionDESC: 'Название: Я-А',
       },
-      getSorting(type) {
-        const sorting = {
-          byPriceASC: 'Цена: по возрастанию',
-          byPriceDESC: 'Цена: по убыванию',
-          byCaptionASC: 'Название: А-Я',
-          byCaptionDESC: 'Название: Я-А',
-        }
-        return sorting[type]
-      },
+    }
+  },
+
+  methods: {
+    handleChangeSelect() {
+      this.$emit('onSortChange', this.sortedProducts)
     },
-  }
+  },
+}
 </script>
