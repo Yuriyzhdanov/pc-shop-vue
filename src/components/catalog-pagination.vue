@@ -2,9 +2,10 @@
   <div class="container-pagination">
     <div class="pagination">
       <a href="#header" class="page active">0</a
-      ><a href="#header" class="page">1</a><a href="#header" class="page">2</a
-      ><a href="#header" class="page">3</a><a href="#header" class="page">4</a
-      ><a href="#header" class="page">5</a><a href="#header" class="page">6</a>
+      ><a href="#header" class="page">1</a> <a href="#header" class="page">2</a
+      ><a href="#header" class="page">3</a> <a href="#header" class="page">4</a
+      ><a href="#header" class="page">5</a>
+      <a href="#header" class="page">6</a>
     </div>
   </div>
 </template>
