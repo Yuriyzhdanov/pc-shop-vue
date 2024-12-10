@@ -26,12 +26,53 @@
       </div>
       <div class="right-item">
         <p>Сортирoвка</p>
-        <select name="sort" class="sort"></select>
+        <select
+          name="sort"
+          class="sort"
+          v-model="selectedSorting"
+          v-on:change="applySorting"
+        >
+          <option
+            v-for="type in availableSortingTypes"
+            :key="type"
+            :value="type"
+          >
+            {{ getSorting(type) }}
+          </option>
+        </select>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {}
+  export default {
+    props: [],
+    emits: ['onSortChange'],
+    data() {
+      return {
+        selectedSorting: 'byPriceASC',
+        availableSortingTypes: [
+          'byPriceASC',
+          'byPriceDESC',
+          'byCaptionASC',
+          'byCaptionDESC',
+        ],
+      }
+    },
+    methods: {
+      applySorting() {
+        this.$emit('onSortChange', this.selectedSorting)
+      },
+      getSorting(type) {
+        const sorting = {
+          byPriceASC: 'Цена: по возрастанию',
+          byPriceDESC: 'Цена: по убыванию',
+          byCaptionASC: 'Название: А-Я',
+          byCaptionDESC: 'Название: Я-А',
+        }
+        return sorting[type]
+      },
+    },
+  }
 </script>
