@@ -22,6 +22,7 @@
         <div class="top">
           <div class="left">
             <catalog-navigation></catalog-navigation>
+            <catalog-count></catalog-count>
             <catalog-sorting
               v-bind:products="products"
               v-on:onSortChange="handleSortChange"
@@ -43,57 +44,59 @@
 </template>
 
 <script>
-import CatalogSearch from './components/catalog-search.vue'
-import CatalogAuthorization from './components/catalog-authorization.vue'
-import CatalogNavigation from './components/catalog-navigation.vue'
-import CatalogSorting from './components/catalog-sorting.vue'
-import CatalogFilter from './components/catalog-filter.vue'
-import CatalogProducts from './components/catalog-products.vue'
-import CatalogPagination from './components/catalog-pagination.vue'
-import CatalogFooter from './components/catalog-footer.vue'
+  import CatalogSearch from './components/catalog-search.vue'
+  import CatalogAuthorization from './components/catalog-authorization.vue'
+  import CatalogNavigation from './components/catalog-navigation.vue'
+  import CatalogSorting from './components/catalog-sorting.vue'
+  import CatalogCount from './components/catalog-product-count.vue'
+  import CatalogFilter from './components/catalog-filter.vue'
+  import CatalogProducts from './components/catalog-products.vue'
+  import CatalogPagination from './components/catalog-pagination.vue'
+  import CatalogFooter from './components/catalog-footer.vue'
 
-import products from './products'
-import SelectOptions from './components/select-options.vue'
+  import products from './products'
+  import SelectOptions from './components/select-options.vue'
 
-export default {
-  name: 'App',
+  export default {
+    name: 'App',
 
-  components: {
-    SelectOptions,
-    CatalogSearch,
-    CatalogAuthorization,
-    CatalogNavigation,
-    CatalogSorting,
-    CatalogFilter,
-    CatalogProducts,
-    CatalogPagination,
-    CatalogFooter,
-  },
-
-  computed: {
-    productsCaptions() {
-      return this.products.map((product) => product.caption)
-    },
-  },
-
-  data() {
-    return {
-      products,
-    }
-  },
-
-  methods: {
-    handleSerchQuery(detail) {
-      this.products = this.products.filter((p) =>
-        p.caption.toLowerCase().includes(detail.toLowerCase())
-      )
+    components: {
+      SelectOptions,
+      CatalogSearch,
+      CatalogAuthorization,
+      CatalogNavigation,
+      CatalogCount,
+      CatalogSorting,
+      CatalogFilter,
+      CatalogProducts,
+      CatalogPagination,
+      CatalogFooter,
     },
 
-    handleSortChange(products) {
-      this.products = products
+    computed: {
+      productsCaptions() {
+        return this.products.map(product => product.caption)
+      },
     },
-  },
-}
+
+    data() {
+      return {
+        products,
+      }
+    },
+
+    methods: {
+      handleSerchQuery(detail) {
+        this.products = this.products.filter(p =>
+          p.caption.toLowerCase().includes(detail.toLowerCase())
+        )
+      },
+
+      handleSortChange(products) {
+        this.products = products
+      },
+    },
+  }
 </script>
 
 <style src="../css/style.css"></style>
