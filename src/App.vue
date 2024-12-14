@@ -10,21 +10,20 @@
         <div class="center">
           <catalog-search
             v-bind:productsCaptions="productsCaptions"
-            v-on:onSearchQuery="handleSerchQuery"
+            v-on:onSearchQuery="handleSearchQuery"
           ></catalog-search>
         </div>
         <div class="right">
           <catalog-authorization></catalog-authorization>
         </div>
       </div>
-
       <div class="main">
         <div class="top">
           <div class="left">
             <catalog-navigation></catalog-navigation>
             <catalog-count></catalog-count>
             <catalog-sorting
-              v-bind:products="products"
+              v-bind:products="paginatedProducts"
               v-on:onSortChange="handleSortChange"
             ></catalog-sorting>
           </div>
@@ -32,8 +31,13 @@
         <div class="bottom row">
           <catalog-filter></catalog-filter>
           <div class="right" id="pageNumberContainer">
-            <catalog-products v-bind:products="products"></catalog-products>
-            <catalog-pagination></catalog-pagination>
+            <catalog-products
+              v-bind:products="paginatedProducts"
+            ></catalog-products>
+            <catalog-pagination
+              v-bind:products="products"
+              v-on:onPageChange="updatePaginatedProducts"
+            ></catalog-pagination>
           </div>
         </div>
       </div>
@@ -82,19 +86,23 @@
     data() {
       return {
         products,
+        paginatedProducts: [],
       }
     },
 
     methods: {
-      handleSerchQuery(detail) {
+      handleSearchQuery(detail) {
         this.products = this.products.filter(p =>
           p.caption.toLowerCase().includes(detail.toLowerCase())
         )
       },
-
       handleSortChange(products) {
         this.products = products
+        this.updatePaginatedProducts()
       },
+    },
+    mounted() {
+      this.paginatedProducts = products.slice(0, 10)
     },
   }
 </script>

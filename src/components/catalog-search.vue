@@ -48,10 +48,4 @@
       },
     },
   }
-
-  // run(products) {
-  //   return products.filter(product =>
-  //     product.caption.toLowerCase().includes(this.query.toLowerCase())
-  //   )
-  // }
 </script>
