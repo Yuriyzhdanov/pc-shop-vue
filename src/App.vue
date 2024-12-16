@@ -36,7 +36,9 @@
             ></catalog-products>
             <catalog-pagination
               v-bind:products="products"
+              v-bind:products-per-page="productsPerPage"
               v-on:onPageChange="updatePaginatedProducts"
+              v-on:onProductsPerPageChange="updateProductsPerPage"
             ></catalog-pagination>
           </div>
         </div>
@@ -87,6 +89,7 @@
       return {
         products,
         paginatedProducts: [],
+        productsPerPage: 10,
       }
     },
 
@@ -100,9 +103,16 @@
         this.products = products
         this.updatePaginatedProducts()
       },
+      updatePaginatedProducts(products) {
+        this.paginatedProducts = products
+      },
+      updateProductsPerPage(newProductsPerPage) {
+        this.productsPerPage = newProductsPerPage
+        this.updatePaginatedProducts(this.products.slice(0, newProductsPerPage))
+      },
     },
     mounted() {
-      this.paginatedProducts = products.slice(0, 10)
+      this.paginatedProducts = products.slice(0, this.productsPerPage)
     },
   }
 </script>

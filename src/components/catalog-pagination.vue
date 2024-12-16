@@ -1,4 +1,25 @@
 <template>
+  <div>
+    <div class="right-item">
+      <p>Товаров на странице</p>
+      <div class="wrap-products-on-page">
+        <select
+          v-model="productsPerPageOptions"
+          v-on:change="handleProductsPerPageChange"
+          name="products-on-page"
+          class="products-on-page"
+        >
+          <option
+            v-for="(val, key) in productsPerPageOptions"
+            :key="key"
+            :value="key"
+          >
+            {{ val }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
   <div class="container-pagination">
     <div class="pagination">
       <a
@@ -17,45 +38,34 @@
 
 <script>
   export default {
-    props: ['products'],
-    emits: ['onPageChange'],
+    props: ['products', 'productsPerPage'],
+    emits: ['onPageChange', 'onProductsPerPageChange'],
     data() {
       return {
         currentPage: 0,
-        productsOnPage: 10,
-        availableProductsOnPage: [10, 20, 30, 40],
+        productsPerPageOptions: [5, 10, 20, 50],
       }
     },
 
     computed: {
+      totalPages() {
+        return Math.ceil(this.products.length / this.productsPerPage)
+      },
       paginatedProducts() {
-        const start = this.currentPage * this.productsOnPage
-        const end = start + this.productsOnPage
+        const start = this.currentPage * this.productsPerPage
+        const end = start + this.productsPerPage
         return this.products.slice(start, end)
       },
-      totalPages() {
-        return Math.ceil(this.products.length / this.productsOnPage)
-      },
     },
-
     methods: {
       handlePageChange(newPage) {
         this.currentPage = newPage
         this.$emit('onPageChange', this.paginatedProducts)
       },
-      updatePaginatedProducts(products) {
-        this.paginatedProducts = products
-      },
-      handleProductsOnPageChange(newLimit) {
-        this.productsOnPage = newLimit
+      handleProductsPerPageChange() {
         this.currentPage = 0
         this.$emit('onPageChange', this.paginatedProducts)
       },
     },
-    // watch: {
-    //   products() {
-    //     this.currentPage = 0
-    //   },
-    // },
   }
 </script>

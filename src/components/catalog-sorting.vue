@@ -2,12 +2,6 @@
   <div class="wrap-sort">
     <div class="right">
       <div class="right-item">
-        <p>Товаров на странице</p>
-        <div class="wrap-products-on-page">
-          <select name="products-on-page" class="products-on-page"></select>
-        </div>
-      </div>
-      <div class="right-item">
         <p>Сортирoвка</p>
         <select
           name="sort"

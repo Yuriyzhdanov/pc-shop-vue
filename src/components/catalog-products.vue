@@ -1,11 +1,12 @@
 <template>
   <div class="container-products pave">
-    {{products}}
+    {{ products }}
     <tile-product
       v-for="product of products"
       v-bind:key="product.id"
       v-bind:product="product"
-    ></tile-product>
+    >
+    </tile-product>
   </div>
 </template>
 
