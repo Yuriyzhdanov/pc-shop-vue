@@ -8,19 +8,19 @@
           </div>
         </div>
         <div class="center">
-          <catalog-search
+          <widget-search
             v-bind:productsCaptions="productsCaptions"
             v-on:onSearchQuery="handleSearchQuery"
-          ></catalog-search>
+          ></widget-search>
         </div>
         <div class="right">
-          <catalog-authorization></catalog-authorization>
+          <panel-authorization></panel-authorization>
         </div>
       </div>
       <div class="main">
         <div class="top">
           <div class="left">
-            <catalog-navigation></catalog-navigation>
+            <app-navigation></app-navigation>
             <catalog-count></catalog-count>
             <catalog-sorting
               v-bind:products="paginatedProducts"
@@ -34,31 +34,31 @@
             <catalog-products
               v-bind:products="paginatedProducts"
             ></catalog-products>
-            <catalog-pagination
+            <widget-pagination
               v-bind:products="products"
               v-bind:products-per-page="productsPerPage"
               v-on:onPageChange="updatePaginatedProducts"
               v-on:onProductsPerPageChange="updateProductsPerPage"
-            ></catalog-pagination>
+            ></widget-pagination>
           </div>
         </div>
       </div>
-      <catalog-footer></catalog-footer>
+      <app-footer></app-footer>
     </div>
     <select-options></select-options>
   </body>
 </template>
 
 <script>
-  import CatalogSearch from './components/catalog-search.vue'
-  import CatalogAuthorization from './components/catalog-authorization.vue'
-  import CatalogNavigation from './components/catalog-navigation.vue'
+  import WidgetSearch from './components/widget-search.vue'
+  import PanelAuthorization from './components/panel-authorization.vue'
+  import AppNavigation from './components/app-navigation.vue'
   import CatalogSorting from './components/catalog-sorting.vue'
   import CatalogCount from './components/catalog-product-count.vue'
   import CatalogFilter from './components/catalog-filter.vue'
   import CatalogProducts from './components/catalog-products.vue'
-  import CatalogPagination from './components/catalog-pagination.vue'
-  import CatalogFooter from './components/catalog-footer.vue'
+  import WidgetPagination from './components/widget-pagination.vue'
+  import AppFooter from './components/app-footer.vue'
 
   import products from './products'
   import SelectOptions from './components/select-options.vue'
@@ -68,15 +68,15 @@
 
     components: {
       SelectOptions,
-      CatalogSearch,
-      CatalogAuthorization,
-      CatalogNavigation,
+      WidgetSearch,
+      PanelAuthorization,
+      AppNavigation,
       CatalogCount,
       CatalogSorting,
       CatalogFilter,
       CatalogProducts,
-      CatalogPagination,
-      CatalogFooter,
+      WidgetPagination,
+      AppFooter,
     },
 
     computed: {

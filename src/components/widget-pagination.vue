@@ -4,7 +4,7 @@
       <p>Товаров на странице</p>
       <div class="wrap-products-on-page">
         <select
-          v-model="productsPerPageOptions"
+          v-model="selectItem"
           v-on:change="handleProductsPerPageChange"
           name="products-on-page"
           class="products-on-page"
@@ -16,6 +16,7 @@
           >
             {{ val }}
           </option>
+          <span>{{ selectItem }}</span>
         </select>
       </div>
     </div>
@@ -43,7 +44,8 @@
     data() {
       return {
         currentPage: 0,
-        productsPerPageOptions: [5, 10, 20, 50],
+        productsPerPageOptions: [10, 20, 50],
+        selectItem: '10',
       }
     },
 
