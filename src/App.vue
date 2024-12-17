@@ -89,7 +89,7 @@
       return {
         products,
         paginatedProducts: [],
-        productsPerPage: 10,
+        // productsPerPage: 10,
       }
     },
 
