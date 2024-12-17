@@ -4,34 +4,31 @@
       <p>Товаров на странице</p>
       <div class="wrap-products-on-page">
         <select
-          v-model="productsPerPage"
-          v-on:change="handleProductsPerPageChange"
+          v-model="selectedProductsPerPage"
           name="products-on-page"
           class="products-on-page"
         >
           <option
-            v-for="(val, key) in productsPerPageOptions"
+            v-for="(val, key) in availableProductsPerPage"
             :key="key"
             :value="key"
           >
             {{ val }}
           </option>
-          {{
-            productsPerPage
-          }}
         </select>
+        {{ selectedProductsPerPage }}
       </div>
     </div>
   </div>
   <div class="container-pagination">
     <div class="pagination">
       <a
-        v-for="page in totalPages"
-        :key="page"
+        v-for="(val, idx) in Array(totalPages)"
+        :key="idx"
         href="#header"
         class="page"
-        v-bind:class="{ active: currentPage === page - 1 }"
-        v-on:click.prevent="handlePageChange(page - 1)"
+        v-bind:class="{ active: selectedPage === idx }"
+        v-on:click.prevent="handlePageChange(idx)"
       >
         {{ page }}
       </a>
@@ -41,34 +38,41 @@
 
 <script>
   export default {
-    props: ['products'],
-    emits: ['onPageChange', 'onProductsPerPageChange'],
+    props: ['sortedProducts'],
+    emits: ['onUpdatePaginatedProducts'],
+
     data() {
       return {
-        currentPage: 0,
-        productsPerPageOptions: [10, 20, 50],
-        productsPerPage: 10,
+        selectedPage: 0,
+        availableProductsPerPage: [10, 20, 50],
+        selectedProductsPerPage: 10,
       }
+    },
+
+    watch: {
+      selectedProductsPerPage() {
+        this.selectedPage = 0
+        this.$emit('onUpdatePaginatedProducts', this.paginatedProducts)
+      },
     },
 
     computed: {
       totalPages() {
-        return Math.ceil(this.products.length / this.productsPerPage)
+        return Math.ceil(
+          this.sortedProducts.length / this.selectedProductsPerPage
+        )
       },
       paginatedProducts() {
-        const start = this.currentPage * this.productsPerPage
-        const end = start + this.productsPerPage
-        return this.products.slice(start, end)
+        const start = this.selectedPage * this.selectedProductsPerPage
+        const end = start + this.selectedProductsPerPage
+        return this.sortedProducts.slice(start, end)
       },
     },
+
     methods: {
-      handlePageChange(newPage) {
-        this.currentPage = newPage
-        this.$emit('onPageChange', this.paginatedProducts)
-      },
-      handleProductsPerPageChange() {
-        this.currentPage = 0
-        this.$emit('onPageChange', this.paginatedProducts)
+      handlePageChange(selectedPage) {
+        this.selectedPage = selectedPage
+        this.$emit('onUpdatePaginatedProducts', this.paginatedProducts)
       },
     },
   }
