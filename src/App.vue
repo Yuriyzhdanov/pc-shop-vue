@@ -23,7 +23,7 @@
             <app-navigation></app-navigation>
             <catalog-count></catalog-count>
             <catalog-sorting
-              v-bind:products="paginatedProducts"
+              v-bind:products="sortedProducts"
               v-on:onSortChange="handleSortChange"
             ></catalog-sorting>
           </div>
@@ -31,15 +31,12 @@
         <div class="bottom row">
           <catalog-filter></catalog-filter>
           <div class="right" id="pageNumberContainer">
-            <catalog-products
-              v-bind:products="paginatedProducts"
-            ></catalog-products>
-            <widget-pagination
-              v-bind:products="products"
-              v-bind:products-per-page="productsPerPage"
-              v-on:onPageChange="updatePaginatedProducts"
-              v-on:onProductsPerPageChange="updateProductsPerPage"
-            ></widget-pagination>
+            <catalog-products v-bind:products="products"></catalog-products>
+            <!-- <widget-pagination
+              v-bind:sortedProducts="sortedProducts"
+              v-on:onUpdatePaginatedProducts="handleUpdatePaginatedProducts"
+            ></widget-pagination> -->
+            <!-- <div>{{ products }}</div> -->
           </div>
         </div>
       </div>
@@ -88,8 +85,8 @@
     data() {
       return {
         products,
-        paginatedProducts: [],
-        // productsPerPage: 10,
+        sortedProducts: [],
+        // paginatedProducts: [],
       }
     },
 
@@ -98,21 +95,15 @@
         this.products = this.products.filter(p =>
           p.caption.toLowerCase().includes(detail.toLowerCase())
         )
+        // this.updatePaginatedProducts()
       },
-      handleSortChange(products) {
-        this.products = products
-        this.updatePaginatedProducts()
+      handleSortChange(sortedProducts) {
+        this.sortedProducts = sortedProducts
+        // this.updatePaginatedProducts()
       },
-      updatePaginatedProducts(products) {
-        this.paginatedProducts = products
-      },
-      updateProductsPerPage(newProductsPerPage) {
-        this.productsPerPage = newProductsPerPage
-        this.updatePaginatedProducts(this.products.slice(0, newProductsPerPage))
-      },
-    },
-    mounted() {
-      this.paginatedProducts = products.slice(0, this.productsPerPage)
+      // handleUpdatePaginatedProducts(products) {
+      //   this.paginatedProducts = products
+      // },
     },
   }
 </script>

@@ -41,7 +41,13 @@
               sensitivity: 'accent',
             }),
         }
-        return this.products.toSorted(sortFunctions[this.selectedSorting])
+        const sorted = this.products.toSorted(
+          sortFunctions[this.selectedSorting]
+        )
+        console.log('this.products', this.products)
+        console.log('this.sortedProducts', this.sortedProducts)
+        console.log('Сортировка:', sorted)
+        return sorted
       },
     },
 
