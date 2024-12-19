@@ -3,12 +3,7 @@
     <div class="right">
       <div class="right-item">
         <p>Сортирoвка</p>
-        <select
-          name="sort"
-          class="sort"
-          v-model="selectedSorting"
-          v-on:change="handleChangeSelect"
-        >
+        <select name="sort" class="sort" v-model="selectedSorting">
           <option
             v-for="(val, key) in availableSortingTypes"
             :key="key"
@@ -23,31 +18,25 @@
 </template>
 
 <script>
+  import sortingFunctions from '../sortingFunctions.js'
+
   export default {
     props: ['products'],
     emits: ['onSortChange'],
 
+    created() {
+      this.$emit('onSortChange', this.sortedProducts)
+    },
+
+    watch: {
+      selectedSorting() {
+        this.$emit('onSortChange', this.sortedProducts)
+      },
+    },
+
     computed: {
       sortedProducts() {
-        const sortFunctions = {
-          byPriceASC: (a, b) => a.convertedPrice - b.convertedPrice,
-          byPriceDESC: (a, b) => b.convertedPrice - a.convertedPrice,
-          byCaptionASC: (a, b) =>
-            a.caption.localeCompare(b.caption, undefined, {
-              sensitivity: 'accent',
-            }),
-          byCaptionDESC: (a, b) =>
-            b.caption.localeCompare(a.caption, undefined, {
-              sensitivity: 'accent',
-            }),
-        }
-        const sorted = this.products.toSorted(
-          sortFunctions[this.selectedSorting]
-        )
-        console.log('this.products', this.products)
-        console.log('this.sortedProducts', this.sortedProducts)
-        console.log('Сортировка:', sorted)
-        return sorted
+        return this.products.toSorted(sortingFunctions[this.selectedSorting])
       },
     },
 
@@ -63,10 +52,6 @@
       }
     },
 
-    methods: {
-      handleChangeSelect() {
-        this.$emit('onSortChange', this.sortedProducts)
-      },
-    },
+    methods: {},
   }
 </script>

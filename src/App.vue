@@ -23,7 +23,7 @@
             <app-navigation></app-navigation>
             <catalog-count></catalog-count>
             <catalog-sorting
-              v-bind:products="sortedProducts"
+              v-bind:products="products"
               v-on:onSortChange="handleSortChange"
             ></catalog-sorting>
           </div>
@@ -31,12 +31,14 @@
         <div class="bottom row">
           <catalog-filter></catalog-filter>
           <div class="right" id="pageNumberContainer">
-            <catalog-products v-bind:products="products"></catalog-products>
-            <!-- <widget-pagination
-              v-bind:sortedProducts="sortedProducts"
+            <catalog-products
+              v-bind:products="paginatedProducts"
+            ></catalog-products>
+
+            <widget-pagination
+              v-bind:sortedProducts="products"
               v-on:onUpdatePaginatedProducts="handleUpdatePaginatedProducts"
-            ></widget-pagination> -->
-            <!-- <div>{{ products }}</div> -->
+            ></widget-pagination>
           </div>
         </div>
       </div>
@@ -86,24 +88,26 @@
       return {
         products,
         sortedProducts: [],
-        // paginatedProducts: [],
+        paginatedProducts: [],
       }
     },
 
     methods: {
       handleSearchQuery(detail) {
-        this.products = this.products.filter(p =>
-          p.caption.toLowerCase().includes(detail.toLowerCase())
-        )
+        // this.products = this.products.filter(p =>
+        //   p.caption.toLowerCase().includes(detail.toLowerCase())
+        // )
         // this.updatePaginatedProducts()
       },
+
       handleSortChange(sortedProducts) {
         this.sortedProducts = sortedProducts
         // this.updatePaginatedProducts()
       },
-      // handleUpdatePaginatedProducts(products) {
-      //   this.paginatedProducts = products
-      // },
+
+      handleUpdatePaginatedProducts(products) {
+        this.paginatedProducts = products
+      },
     },
   }
 </script>

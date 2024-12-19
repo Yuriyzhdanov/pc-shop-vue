@@ -41,6 +41,10 @@
     props: ['sortedProducts'],
     emits: ['onUpdatePaginatedProducts'],
 
+    created() {
+      this.$emit('onUpdatePaginatedProducts', this.paginatedProducts)
+    },
+
     data() {
       return {
         selectedPage: 0,
@@ -62,6 +66,7 @@
           this.sortedProducts.length / this.selectedProductsPerPage
         )
       },
+
       paginatedProducts() {
         const start = this.selectedPage * this.selectedProductsPerPage
         const end = start + this.selectedProductsPerPage
