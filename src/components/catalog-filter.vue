@@ -5,8 +5,6 @@
       <button v-on:click="clearFilter" class="btn clear-filter">x</button>
     </div>
     <div class="wrap-props">
-      {{ products }}
-      {{ sortedProducts }}
       <h3>Цена</h3>
       <div class="wrap-range">
         <label for="price_from"
@@ -40,7 +38,7 @@
 </template>
 <script>
   export default {
-    props: ['products', 'sortedProducts'],
+    props: ['products'],
     data() {
       return {
         min: 0,
@@ -49,48 +47,53 @@
         to: Infinity,
       }
     },
-    // methods: {
-    //   calcMinMax() {
-    //     const prices = this.products.map(product => product.convertedPrice)
-    //     this.min = Math.floor(prices.length ? Math.min(...prices) : 2)
-    //     this.max = Math.ceil(prices.length ? Math.max(...prices) : 3)
-    //     if (this.from === 0 && this.to === Infinity) {
-    //       this.resetFromTo()
-    //     }
-    //     if (this.from < this.min || this.to > this.max) {
-    //       this.resetFromTo()
-    //     }
-    //   },
-    //   resetFromTo() {
-    //     this.from = this.min
-    //     this.to = this.max
-    //   },
-    //   setFrom(value) {
-    //     this.from = setWithLimits(value, this.max, this.min)
-    //     if (this.from > this.to) this.to = this.from
-    //   },
-    //   setTo(value) {
-    //     this.to = setWithLimits(value, this.max, this.min)
-    //     if (this.to < this.from) this.from = this.to
-    //   },
-    //   applyFilter() {
-    //     const filteredProducts = this.products.filter(
-    //       product =>
-    //         this.from <= product.convertedPrice &&
-    //         product.convertedPrice <= this.to
-    //     )
-    //     console.log(filteredProducts)
-    //   },
-    //   clearFilter() {
-    //     this.from = this.min
-    //     this.to = this.max
-    //   },
-    // },
-    // watch: {
-    //   products: 'calcMinMax',
-    // },
-    // created() {
-    //   this.calcMinMax()
-    // },
+    methods: {
+      calcMinMax() {
+        const prices = this.products.map(product => product.convertedPrice)
+        this.min = Math.floor(prices.length ? Math.min(...prices) : 2)
+        this.max = Math.ceil(prices.length ? Math.max(...prices) : 3)
+        if (this.from === 0 && this.to === Infinity) {
+          this.resetFromTo()
+        }
+        if (this.from < this.min || this.to > this.max) {
+          this.resetFromTo()
+        }
+      },
+      resetFromTo() {
+        this.from = this.min
+        this.to = this.max
+      },
+      setFrom(value) {
+        this.from = setWithLimits(value, this.max, this.min)
+        if (this.from > this.to) this.to = this.from
+      },
+      setTo(value) {
+        this.to = setWithLimits(value, this.max, this.min)
+        if (this.to < this.from) this.from = this.to
+      },
+      applyFilter() {
+        const filteredProducts = this.products.filter(
+          product =>
+            this.from <= product.convertedPrice &&
+            product.convertedPrice <= this.to
+        )
+        this.$emit('onFilterPriceRange', filteredProducts)
+      },
+      clearFilter() {
+        this.from = this.min
+        this.to = this.max
+        this.$emit('onFilterPriceRange', this.products)
+      },
+    },
+    watch: {
+      products: {
+        handler: 'calcMinMax',
+      },
+    },
+    created() {
+      this.from = this.min
+      this.to = this.max
+      this.applyFilter()
+    },
   }
 </script>

@@ -29,7 +29,10 @@
           </div>
         </div>
         <div class="bottom row">
-          <catalog-filter></catalog-filter>
+          <catalog-filter
+            v-bind:products="products"
+            v-on:onFilter="handleFilteredProducts"
+          ></catalog-filter>
           <div class="right" id="pageNumberContainer">
             <catalog-products
               v-bind:products="paginatedProducts"
@@ -107,6 +110,9 @@
 
       handleUpdatePaginatedProducts(paginatedProducts) {
         this.paginatedProducts = paginatedProducts
+      },
+      handleFilteredProducts(filteredPriceProducts) {
+        this.paginatedProducts = filteredPriceProducts
       },
     },
   }
