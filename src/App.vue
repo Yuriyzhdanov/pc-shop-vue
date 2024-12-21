@@ -31,7 +31,7 @@
         <div class="bottom row">
           <catalog-filter
             v-bind:products="products"
-            v-on:onFilter="handleFilteredProducts"
+            v-on:onFilterPriceRange="handleFilteredProducts"
           ></catalog-filter>
           <div class="right" id="pageNumberContainer">
             <catalog-products
