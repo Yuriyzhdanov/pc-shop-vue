@@ -8,10 +8,10 @@
           </div>
         </div>
         <div class="center">
-          <widget-search
+          <!-- <widget-search
             v-bind:productsCaptions="productsCaptions"
             v-on:onSearchQuery="handleSearchQuery"
-          ></widget-search>
+          ></widget-search> -->
         </div>
         <div class="right">
           <panel-authorization></panel-authorization>
@@ -22,10 +22,10 @@
           <div class="left">
             <app-navigation></app-navigation>
             <catalog-count></catalog-count>
-            <catalog-sorting
+            <!-- <catalog-sorting
               v-bind:products="products"
               v-on:onSortChange="handleSortChange"
-            ></catalog-sorting>
+            ></catalog-sorting> -->
           </div>
         </div>
         <div class="bottom row">
@@ -38,10 +38,10 @@
               v-bind:products="paginatedProducts"
             ></catalog-products>
 
-            <widget-pagination
+            <!-- <widget-pagination
               v-bind:sortedProducts="products"
               v-on:onUpdatePaginatedProducts="handleUpdatePaginatedProducts"
-            ></widget-pagination>
+            ></widget-pagination> -->
           </div>
         </div>
       </div>
