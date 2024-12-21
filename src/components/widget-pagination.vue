@@ -11,12 +11,11 @@
           <option
             v-for="(val, key) in availableProductsPerPage"
             :key="key"
-            :value="key"
+            :value="val"
           >
             {{ val }}
           </option>
         </select>
-        {{ selectedProductsPerPage }}
       </div>
     </div>
   </div>
@@ -27,10 +26,11 @@
         :key="idx"
         href="#header"
         class="page"
+        v-bind:data-content="idx"
         v-bind:class="{ active: selectedPage === idx }"
         v-on:click.prevent="handlePageChange(idx)"
       >
-        {{ page }}
+        {{ idx }}
       </a>
     </div>
   </div>

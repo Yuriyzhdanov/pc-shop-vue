@@ -94,19 +94,19 @@
 
     methods: {
       handleSearchQuery(detail) {
-        // this.products = this.products.filter(p =>
-        //   p.caption.toLowerCase().includes(detail.toLowerCase())
-        // )
-        // this.updatePaginatedProducts()
+        this.products = this.products.filter(p =>
+          p.caption.toLowerCase().includes(detail.toLowerCase())
+        )
+        this.handleUpdatePaginatedProducts(this.paginatedProducts)
       },
 
       handleSortChange(sortedProducts) {
         this.sortedProducts = sortedProducts
-        // this.updatePaginatedProducts()
+        this.handleUpdatePaginatedProducts(this.paginatedProducts)
       },
 
-      handleUpdatePaginatedProducts(products) {
-        this.paginatedProducts = products
+      handleUpdatePaginatedProducts(paginatedProducts) {
+        this.paginatedProducts = paginatedProducts
       },
     },
   }
