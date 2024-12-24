@@ -82,7 +82,7 @@
         this.$emit('onFilterPriceRange', this.pricedProducts)
       },
 
-      setTo(value) {
+      setPriceTo(value) {
         this.to = this.validatePriceRange(value, this.max, this.min)
         if (this.to < this.from) {
           this.from = this.to
@@ -97,7 +97,7 @@
       },
 
       to(newVal) {
-        this.setTo(newVal)
+        this.setPriceTo(newVal)
       },
 
       pricedProducts() {
