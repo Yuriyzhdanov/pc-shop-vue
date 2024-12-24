@@ -41,7 +41,7 @@
     props: ['sortedProducts'],
     emits: ['onUpdatePaginatedProducts'],
 
-    created() {
+    mounted() {
       this.$emit('onUpdatePaginatedProducts', this.paginatedProducts)
     },
 

@@ -31,17 +31,17 @@
         <div class="bottom row">
           <catalog-filter
             v-bind:products="products"
-            v-on:onFilterPriceRange="handleFilteredProducts"
+            v-on:onFilterPriceRange="handleFilteredPriceProducts"
           ></catalog-filter>
           <div class="right" id="pageNumberContainer">
             <catalog-products
               v-bind:products="paginatedProducts"
             ></catalog-products>
 
-            <!-- <widget-pagination
+            <widget-pagination
               v-bind:sortedProducts="products"
-              v-on:onUpdatePaginatedProducts="handleUpdatePaginatedProducts"
-            ></widget-pagination> -->
+              v-on:onUpdatePaginatedProducts="handlePaginatedProducts"
+            ></widget-pagination>
           </div>
         </div>
       </div>
@@ -100,18 +100,19 @@
         this.products = this.products.filter(p =>
           p.caption.toLowerCase().includes(detail.toLowerCase())
         )
-        this.handleUpdatePaginatedProducts(this.paginatedProducts)
+        this.handlePaginatedProducts(this.paginatedProducts)
       },
 
       handleSortChange(sortedProducts) {
         this.sortedProducts = sortedProducts
-        this.handleUpdatePaginatedProducts(this.paginatedProducts)
+        this.handlePaginatedProducts(this.paginatedProducts)
       },
 
-      handleUpdatePaginatedProducts(paginatedProducts) {
+      handlePaginatedProducts(paginatedProducts) {
         this.paginatedProducts = paginatedProducts
       },
-      handleFilteredProducts(filteredPriceProducts) {
+
+      handleFilteredPriceProducts(filteredPriceProducts) {
         this.paginatedProducts = filteredPriceProducts
       },
     },
