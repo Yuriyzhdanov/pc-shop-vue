@@ -22,10 +22,10 @@
           <div class="left">
             <ui-navigation></ui-navigation>
             <ui-user-products></ui-user-products>
-            <!-- <widget-sorting
-              v-bind:products="products"
+            <widget-sorting
+              v-bind:pricedProducts="pricedProducts"
               v-on:onSortChange="handleSortChange"
-            ></widget-sorting> -->
+            ></widget-sorting>
           </div>
         </div>
         <div class="bottom row">
@@ -35,11 +35,11 @@
           ></widget-filter>
           <div class="right" id="pageNumberContainer">
             <widget-catalog
-              v-bind:products="paginatedProducts"
+              v-bind:paginatedProducts="sortedProducts"
             ></widget-catalog>
 
             <widget-pagination
-              v-bind:sortedProducts="products"
+              v-bind:sortedProducts="sortedProducts"
               v-on:onUpdatePaginatedProducts="handlePaginatedProducts"
             ></widget-pagination>
           </div>
@@ -88,30 +88,31 @@
     data() {
       return {
         products,
+        pricedProducts: [],
         sortedProducts: [],
         paginatedProducts: [],
       }
     },
 
     methods: {
-      handleSearchQuery(detail) {
-        this.products = this.products.filter(p =>
-          p.caption.toLowerCase().includes(detail.toLowerCase())
-        )
-        this.handlePaginatedProducts(this.paginatedProducts)
+      // handleSearchQuery(detail) {
+      //   this.products = this.products.filter(p =>
+      //     p.caption.toLowerCase().includes(detail.toLowerCase())
+      //   )
+      //   this.handlePaginatedProducts(this.pricedProducts)
+      // },
+
+      handleFilteredPriceProducts(pricedProducts) {
+        this.pricedProducts = pricedProducts
       },
 
       handleSortChange(sortedProducts) {
         this.sortedProducts = sortedProducts
-        this.handlePaginatedProducts(this.paginatedProducts)
+        // !!! this.handlePaginatedProducts(this.pricedProducts)
       },
 
       handlePaginatedProducts(paginatedProducts) {
         this.paginatedProducts = paginatedProducts
-      },
-
-      handleFilteredPriceProducts(filteredPriceProducts) {
-        this.paginatedProducts = filteredPriceProducts
       },
     },
   }

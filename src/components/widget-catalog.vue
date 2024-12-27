@@ -1,8 +1,7 @@
 <template>
   <div class="container-products pave">
-    {{ products }}
     <tile-product
-      v-for="product of products"
+      v-for="product of paginatedProducts"
       v-bind:key="product.id"
       v-bind:product="product"
     >
@@ -15,6 +14,6 @@
 
   export default {
     components: { TileProduct },
-    props: ['products'],
+    props: ['paginatedProducts'],
   }
 </script>

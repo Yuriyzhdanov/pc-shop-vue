@@ -21,7 +21,7 @@
   import sortingFunctions from '../sortingFunctions.js'
 
   export default {
-    props: ['products'],
+    props: ['pricedProducts'],
     emits: ['onSortChange'],
 
     created() {
@@ -36,7 +36,10 @@
 
     computed: {
       sortedProducts() {
-        return this.products.toSorted(sortingFunctions[this.selectedSorting])
+        console.log(this.pricedProducts.length)
+        return this.pricedProducts.toSorted(
+          sortingFunctions[this.selectedSorting]
+        )
       },
     },
 

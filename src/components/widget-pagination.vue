@@ -56,6 +56,9 @@
     watch: {
       selectedProductsPerPage() {
         this.selectedPage = 0
+      },
+
+      paginatedProducts() {
         this.$emit('onUpdatePaginatedProducts', this.paginatedProducts)
       },
     },
