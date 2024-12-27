@@ -5,6 +5,3 @@
     <a href="./cart.html">Корзина</a>
   </div>
 </template>
-<script>
-  export default {}
-</script>
