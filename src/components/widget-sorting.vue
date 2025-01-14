@@ -29,6 +29,10 @@
     },
 
     watch: {
+      pricedProducts() {
+        this.$emit('onSortChange', this.sortedProducts)
+      },
+
       selectedSorting() {
         this.$emit('onSortChange', this.sortedProducts)
       },
@@ -36,7 +40,6 @@
 
     computed: {
       sortedProducts() {
-        console.log(this.pricedProducts.length)
         return this.pricedProducts.toSorted(
           sortingFunctions[this.selectedSorting]
         )

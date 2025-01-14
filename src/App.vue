@@ -38,10 +38,10 @@
               v-bind:paginatedProducts="sortedProducts"
             ></widget-catalog>
 
-            <widget-pagination
+            <!-- <widget-pagination
               v-bind:sortedProducts="sortedProducts"
               v-on:onUpdatePaginatedProducts="handlePaginatedProducts"
-            ></widget-pagination>
+            ></widget-pagination> -->
           </div>
         </div>
       </div>
@@ -103,17 +103,19 @@
       // },
 
       handleFilteredPriceProducts(pricedProducts) {
+        console.log('pricedProducts', pricedProducts.length)
         this.pricedProducts = pricedProducts
       },
 
       handleSortChange(sortedProducts) {
+        console.log('sortedProducts', sortedProducts.length)
         this.sortedProducts = sortedProducts
         // !!! this.handlePaginatedProducts(this.pricedProducts)
       },
 
-      handlePaginatedProducts(paginatedProducts) {
-        this.paginatedProducts = paginatedProducts
-      },
+      // handlePaginatedProducts(paginatedProducts) {
+      //   this.paginatedProducts = paginatedProducts
+      // },
     },
   }
 </script>

@@ -19,6 +19,7 @@
   export default {
     components: { FilterPrice },
     props: ['products'],
+    emits: ['onFilterPriceRange'],
 
     methods: {
       updatePricedProducts(pricedProducts) {
